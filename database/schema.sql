@@ -1,0 +1,30 @@
+CREATE DATABASE IF NOT EXISTS jp_workshop_khata
+  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE jp_workshop_khata;
+
+CREATE TABLE IF NOT EXISTS users (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(80) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS purchases (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  part_name VARCHAR(180) NOT NULL,
+  unit_price DECIMAL(12,2) NOT NULL,
+  quantity DECIMAL(12,3) NOT NULL,
+  total DECIMAL(14,2) NOT NULL,
+  description VARCHAR(255) NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_purchases_created_at (created_at)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS payments (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  amount DECIMAL(14,2) NOT NULL,
+  method ENUM('Cash','Bank transfer','eSewa','Other') NOT NULL DEFAULT 'Cash',
+  note VARCHAR(255) NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_payments_created_at (created_at)
+) ENGINE=InnoDB;

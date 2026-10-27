@@ -1,0 +1,21 @@
+﻿# Local database configuration and secrets
+/config/config.php
+
+# Backups and exported data
+/backups/
+/backup/
+/backup s/
+*.sql.bak
+*.dump
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Dependencies and temporary files
+/vendor/
+/node_modules/
+*.log
+.DS_Store
+Thumbs.db
